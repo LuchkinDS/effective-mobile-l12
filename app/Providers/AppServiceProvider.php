@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Repositories\TaskRepository;
+use App\Repositories\TaskRepositoryInterface;
+use App\Services\CreateTask;
+use App\Services\DeleteTask;
+use App\Services\UpdateTask;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(CreateTask::class);
+        $this->app->singleton(UpdateTask::class);
+        $this->app->singleton(DeleteTask::class);
+        $this->app->bind(TaskRepositoryInterface::class, TaskRepository::class,);
     }
 
     /**
